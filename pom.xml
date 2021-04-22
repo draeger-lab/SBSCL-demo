@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.draegerlab</groupId>
+  <artifactId>sbscl_demo</artifactId>
+
+  <!-- Output to jar format -->
+  <packaging>jar</packaging>
+
+  <!-- =================================================================== -->
+  <!-- General project information                                         -->
+  <!-- =================================================================== -->
+
+  <name>Demo Code for the Systems Biology Simulation Core Library (SBSCL)</name>
+  <version>1.0</version>
+  <url>https://github.com/draeger-lab/SBSCL-demo/</url>
+  <inceptionYear>2021</inceptionYear>
+  <description>
+  This project provides example code for using the Systems Biology Simulation Core Library (SBSCL).
+  </description>
+
+  <properties>
+    <jdk.version>1.8</jdk.version>
+    <maven.build.timestamp.format>yyyy</maven.build.timestamp.format>
+    <year>${maven.build.timestamp}</year>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.license.url>https://github.com/draeger-lab/SBSCL-demo/blob/main/LICENSE</project.license.url>
+    <site.path>https://draeger-lab.github.io/SBSCL-demo/docs/</site.path>
+  </properties>
+
+  <issueManagement>
+    <system>GitHub Issues</system>
+    <url>${project.url}/issues</url>
+  </issueManagement>
+
+  <!-- =================================================================== -->
+  <!-- Dependencies                                                        -->
+  <!-- =================================================================== -->
+
+  <dependencies>
+    <dependency>
+      <groupId>org.draegerlab</groupId>
+      <artifactId>sbscl</artifactId>
+      <version>2.1</version>
+    </dependency>
+  </dependencies>
+
+  <!-- =================================================================== -->
+  <!-- Building                                                            -->
+  <!-- =================================================================== -->
+
+  <build>
+    <pluginManagement>
+      <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.3</version>
+          <configuration>
+            <source>${jdk.version}</source>
+            <target>${jdk.version}</target>
+          </configuration>
+        </plugin>
+    </pluginManagement>
+  </build>
+
+</project>
