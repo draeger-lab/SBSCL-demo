@@ -17,7 +17,7 @@
   <url>https://github.com/draeger-lab/SBSCL-demo/</url>
   <inceptionYear>2021</inceptionYear>
   <description>
-  This project provides example code for using the Systems Biology Simulation Core Library (SBSCL).
+    This project provides example code for using the Systems Biology Simulation Core Library (SBSCL).
   </description>
 
   <properties>
@@ -25,14 +25,8 @@
     <maven.build.timestamp.format>yyyy</maven.build.timestamp.format>
     <year>${maven.build.timestamp}</year>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.license.url>https://github.com/draeger-lab/SBSCL-demo/blob/main/LICENSE</project.license.url>
-    <site.path>https://draeger-lab.github.io/SBSCL-demo/docs/</site.path>
+    <project.license.url>${project.url}/blob/main/LICENSE</project.license.url>
   </properties>
-
-  <issueManagement>
-    <system>GitHub Issues</system>
-    <url>${project.url}/issues</url>
-  </issueManagement>
 
   <!-- =================================================================== -->
   <!-- Dependencies                                                        -->
