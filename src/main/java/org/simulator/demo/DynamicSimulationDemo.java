@@ -24,16 +24,11 @@ import org.simulator.sbml.SBMLinterpreter;
  */
 public class DynamicSimulationDemo {
 
-  /**
-   * Default example model.
-   */
-  private static final String default_dynamic_model =
-      "https://www.ebi.ac.uk/biomodels/model/download/BIOMD0000000010.2?filename=BIOMD0000000010_url.xml";
-
   private MultiTable solution;
 
   /**
-   * Performs a dynamic simulation for the given model file at the given time points.
+   * Performs a dynamic simulation for the given model file at the given time
+   * points.
    *
    * @param doc
    * @param timePoints
@@ -45,7 +40,8 @@ public class DynamicSimulationDemo {
       throws SBMLException, ModelOverdeterminedException, DerivativeException {
     SBMLinterpreter interpreter = new SBMLinterpreter(doc.getModel());
     AbstractDESSolver solver = new RosenbrockSolver();
-    solution = solver.solve(interpreter, interpreter.getInitialValues(), timePoints);
+    solution =
+        solver.solve(interpreter, interpreter.getInitialValues(), timePoints);
   }
 
 
@@ -54,6 +50,9 @@ public class DynamicSimulationDemo {
    * fixed time points and prints the solution to the standard out stream.
    *
    * @param args
+   *        optional: if an absolute or relative path to a valid SBML file is
+   *        given, this file will be loaded for simulation. If no arguments are
+   *        given, a default file will be downloaded automatically.
    * @throws XMLStreamException
    * @throws IOException
    * @throws ModelOverdeterminedException
@@ -62,10 +61,21 @@ public class DynamicSimulationDemo {
    */
   public static void main(String[] args) throws IOException, XMLStreamException,
   SBMLException, ModelOverdeterminedException, DerivativeException {
-    File file = DemoFileLoader.load(default_dynamic_model);
 
+    // Load SBML model from file
+    File demoFile;
+    if (args.length > 0) {
+      demoFile = DemoFileLoader.load(args[0]);
+    } else {
+      demoFile = DemoFileLoader.load(DemoFileLoader.defaultDynamicModel);
+    }
+
+    // Conduct the simulation
     double[] timePoints = {0.0, 0.1, 0.2, 0.3, 0.4, 0.5};
-    DynamicSimulationDemo demo = new DynamicSimulationDemo(SBMLReader.read(file), timePoints);
+    DynamicSimulationDemo demo =
+        new DynamicSimulationDemo(SBMLReader.read(demoFile), timePoints);
+
+    // Print the result
     demo.printResult(demo.getSolution(), System.out);
   }
 
@@ -84,7 +94,7 @@ public class DynamicSimulationDemo {
    * @param solution
    * @param out
    */
-  private void printResult(MultiTable solution, PrintStream out) {
+  public void printResult(MultiTable solution, PrintStream out) {
     for (int i = 0; i < solution.getColumnCount(); i++) {
       out.print(solution.getColumnName(i) + ",");
     }

@@ -37,6 +37,13 @@ public class DemoFileLoader {
   public static final String defaultCOBRAmodel = "http://bigg.ucsd.edu/static/models/e_coli_core.xml.gz";
 
   /**
+   * Default example model.
+   */
+  public static final String defaultDynamicModel =
+      "https://www.ebi.ac.uk/biomodels/model/download/BIOMD0000000010.2?filename=BIOMD0000000010_url.xml";
+
+
+  /**
    * Reads an SBML model from a given URL and writes it into a temporary file which is then returned.
    *
    * @param url
