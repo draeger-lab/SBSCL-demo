@@ -2,7 +2,6 @@ package org.simulator.demo;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintStream;
 
 import javax.xml.stream.XMLStreamException;
 
@@ -65,9 +64,9 @@ public class DynamicSimulationDemo {
     // Load SBML model from file
     File demoFile;
     if (args.length > 0) {
-      demoFile = DemoFileLoader.load(args[0]);
+      demoFile = DemoFileHandler.load(args[0]);
     } else {
-      demoFile = DemoFileLoader.load(DemoFileLoader.defaultDynamicModel);
+      demoFile = DemoFileHandler.load(DemoFileHandler.defaultDynamicModel);
     }
 
     // Conduct the simulation
@@ -76,7 +75,7 @@ public class DynamicSimulationDemo {
         new DynamicSimulationDemo(SBMLReader.read(demoFile), timePoints);
 
     // Print the result
-    demo.printResult(demo.getSolution(), System.out);
+    DemoFileHandler.printResult(demo.getSolution(), System.out);
   }
 
 
@@ -85,27 +84,6 @@ public class DynamicSimulationDemo {
    */
   public MultiTable getSolution() {
     return solution;
-  }
-
-
-  /**
-   * Prints the given time course simulation to the given output stream.
-   *
-   * @param solution
-   * @param out
-   */
-  public void printResult(MultiTable solution, PrintStream out) {
-    for (int i = 0; i < solution.getColumnCount(); i++) {
-      out.print(solution.getColumnName(i) + ",");
-    }
-    out.println();
-    for (int i = 0; i < solution.getRowCount(); i++) {
-      out.print(solution.getTimePoint(i) + ",");
-      for (int j = 0; j < solution.getColumnCount(); j++) {
-        out.print(solution.getValueAt(i, j) + ",");
-      }
-      out.println();
-    }
   }
 
 }

@@ -53,9 +53,9 @@ public class SBSCLdemo {
   public static void main(String args[]) throws XMLStreamException, IOException, SBMLException, ModelOverdeterminedException {
     File demoFile;
     if (args.length > 0) {
-      demoFile = DemoFileLoader.load(args[0]);
+      demoFile = DemoFileHandler.load(args[0]);
     } else {
-      demoFile = DemoFileLoader.load(DemoFileLoader.defaultCOBRAmodel);
+      demoFile = DemoFileHandler.load(DemoFileHandler.defaultCOBRAmodel);
     }
     new SBSCLdemo(demoFile);
   }
