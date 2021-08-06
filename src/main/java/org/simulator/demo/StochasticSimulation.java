@@ -4,6 +4,7 @@
 package org.simulator.demo;
 
 import java.io.File;
+import java.io.PrintWriter;
 
 import fern.network.Network;
 import fern.network.sbml.SBMLNetwork;
@@ -23,9 +24,10 @@ public class StochasticSimulation {
     Network net = NetworkTools.loadNetwork(new File(args[0]));
     Simulator sim = new GillespieEnhanced(net);
     ((SBMLNetwork) net).registerEvents(sim);
-    Observer observer = new AmountIntervalObserver(sim, 0, fill(net.getNumSpecies()));
+    Observer observer = new AmountIntervalObserver(sim, 0.1d, fill(net.getNumSpecies()));
     sim.addObserver(observer);
     sim.start(5d); // end time
+    observer.setPrintWriter(new PrintWriter(System.out));
     observer.print();
   }
 
@@ -37,8 +39,8 @@ public class StochasticSimulation {
    */
   private static int[] fill(int numSpecies) {
     int[] array = new int[numSpecies];
-    for (int i = 0; i < numSpecies; i++) {
-      array[i] = i;
+    for (int i = 0; i < numSpecies; array[i] = i++) {
+      ;
     }
     return array;
   }
