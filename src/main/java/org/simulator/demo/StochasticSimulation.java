@@ -13,6 +13,7 @@ import fern.simulation.algorithm.GillespieEnhanced;
 import fern.simulation.observer.AmountIntervalObserver;
 import fern.simulation.observer.Observer;
 import fern.tools.NetworkTools;
+import fern.tools.NumberTools;
 
 /**
  * @author Andreas Dr&auml;ger
@@ -24,24 +25,13 @@ public class StochasticSimulation {
     Network net = NetworkTools.loadNetwork(new File(args[0]));
     Simulator sim = new GillespieEnhanced(net);
     ((SBMLNetwork) net).registerEvents(sim);
-    Observer observer = new AmountIntervalObserver(sim, 0.1d, fill(net.getNumSpecies()));
+    String[] species = NetworkTools.getSpeciesNames(sim.getNet(),
+      NumberTools.getNumbersTo(sim.getNet().getNumSpecies() - 1));
+    Observer observer = new AmountIntervalObserver(sim, 0.1d, 5, species);
     sim.addObserver(observer);
     sim.start(5d); // end time
     observer.setPrintWriter(new PrintWriter(System.out));
     observer.print();
   }
 
-
-  /**
-   * Helper function to fill an array with increasing values.
-   * @param numSpecies
-   * @return
-   */
-  private static int[] fill(int numSpecies) {
-    int[] array = new int[numSpecies];
-    for (int i = 0; i < numSpecies; array[i] = i++) {
-      ;
-    }
-    return array;
-  }
 }
