@@ -29,7 +29,7 @@ public class FBCdemo {
   public FBCdemo(SBMLDocument doc) throws Exception {
     FluxBalanceAnalysis solver = new FluxBalanceAnalysis(doc);
     if (solver.solve()) {
-      logger.info(format("Objective value:\t{0}", solver.getObjectiveValue()));
+      logger.info(format("Objective value:\t{0,number,##.#####}", solver.getObjectiveValue()));
       logger.info(format("Fluxes:\t{0}", solver.getSolution()));
     } else {
       logger.warning(format("Solver returned null for model {0}.", doc.getModel().getName()));
